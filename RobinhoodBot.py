@@ -17,8 +17,7 @@ def run(sc):
     global enteredTrade
     global rsiPeriod
     print("Getting historical quotes")
-    # Get 5 minute ba
-    # r data for Ford stock
+    # Get 5 minute bar data for Ford stock
     historical_quotes = rh.get_historical_quotes("F", "5minute", "day")
     closePrices = []
     #format close prices for RSI
@@ -44,7 +43,7 @@ def run(sc):
             rh.place_sell_order(instrument, 1)
             enteredTrade = False
         print(rsi)
-    #call this method again in 1 minute for new price changes
+    #call this method again every 5 minutes for new price changes
     s.enter(300, 1, run, (sc,))
 
 s.enter(1, 1, run, (s,))
